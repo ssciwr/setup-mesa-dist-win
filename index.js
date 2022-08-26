@@ -10,7 +10,7 @@ async function run() {
     const filename = `mesa3d-${version}-${build}.7z`
     const url = `${repo}/releases/download/${version}/${filename}`
     console.log(`Downloading ${url} ...`);
-    const path_7z = await tc.downloadTool(url, 'C:/mesa.7z');
+    const path_7z = await tc.downloadTool(url, 'mesa.7z');
     await exec.exec('powershell.exe', ['ls']);
     await exec.exec('powershell.exe', ['ls', path_7z]);
     console.log(`Downloaded to ${path_7z}`);
