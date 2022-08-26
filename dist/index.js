@@ -6694,10 +6694,14 @@ async function run() {
     const repo = "https://github.com/pal1000/mesa-dist-win"
     const version = core.getInput('version');
     const build = core.getInput('build');
-    const url = `${repo}/releases/download/${version}/mesa3d-${version}-${build}.7z`
+    const filename = `mesa3d-${version}-${build}.7z`
+    const url = `${repo}/releases/download/${version}/${filename}`
     console.log(`Downloading ${url} ...`);
-    const path_7z = await tc.downloadTool(url);
-    console.log(`Extracting ${path_7z}...`);
+    const folder_7z = await tc.downloadTool(url);
+    await exec.exec('cmd.exe', ['dir', folder_7z]);
+    const file_7z = `${folder_7z}\\${filename}`
+    console.log(`Downloaded to ${file_7z}`);
+    console.log(`Extracting $file_7z} ...`);
     const path_cmd = await tc.extract7z(path_7z);
     console.log(`Extracted to ${path_cmd}...`);
     await exec.exec('cmd.exe', ['pwd']);
