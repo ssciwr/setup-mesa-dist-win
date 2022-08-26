@@ -15,13 +15,11 @@ async function run() {
     await exec.exec('powershell.exe', ['ls', path_7z]);
     console.log(`Downloaded to ${path_7z}`);
     console.log(`Extracting ${path_7z} ...`);
-    // const path_cmd = await tc.extract7z(path_7z, process.cwd());
     await exec.exec('7z.exe', ['x', path_7z]);
     console.log(`Extracted`);
     await exec.exec('powershell.exe', ['ls']);
-    await exec.exec('powershell.exe', ['ls', path_cmd]);
-    console.log(`Running systemwidedeploy.cmd 1...`);
-    await exec.exec('powershell.exe', ['.\systemwidedeploy.cmd', '1']);
+    console.log(`Running systemwidedeploy.cmd 1 ...`);
+    await exec.exec('powershell.exe', ['.\\systemwidedeploy.cmd', '1']);
   } catch (error) {
     core.setFailed(error.message);
   }
