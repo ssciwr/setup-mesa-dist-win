@@ -4,7 +4,7 @@ const exec = require('@actions/exec');
 const io = require('@actions/io');
 
 async function run() {
-  if (process.platform === 'win32'){
+  if (process.platform != 'win32'){
     core.info(`This action is only available for windows.`);
   } else {
     try {

@@ -6691,7 +6691,7 @@ const exec = __nccwpck_require__(1514);
 const io = __nccwpck_require__(7436);
 
 async function run() {
-  if (process.platform === 'win32'){
+  if (process.platform != 'win32'){
     core.info(`This action is only available for windows.`);
   } else {
     try {
