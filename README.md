@@ -4,18 +4,18 @@ A GitHub Action to install Mesa3D from [pal1000/mesa-dist-win](https://github.co
 
 ## Example usage
 
-```
-uses: lkeegan/setup-mesa-dist-win@v1
+```yaml
+  - uses: lkeegan/setup-mesa-dist-win@v1
 ```
 
 Optionally specify the release version, build type or deployment choice:
 
-```
-uses: lkeegan/setup-mesa-dist-win@v1
-with:
-  version: '22.1.7'
-  build-type: 'release-msvc'
-  deployment-choice: '1'
+```yaml
+  - uses: lkeegan/setup-mesa-dist-win@v1
+    with:
+      version: '22.1.7'
+      build-type: 'release-msvc'
+      deployment-choice: '1'
 ```
 
 ## Development
