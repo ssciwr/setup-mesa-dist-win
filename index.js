@@ -8,8 +8,8 @@ async function run() {
     const version = core.getInput('version');
     const build = core.getInput('build');
     const url = `${repo}/releases/download/${version}/mesa3d-${version}-${build}.7z`
-    console.log(`Downloading ${url}...`);
-    const path_7z = await tc.downloadTool('https://nodejs.org/dist/v12.7.0/node-v12.7.0-win-x64.7z');
+    console.log(`Downloading ${url} ...`);
+    const path_7z = await tc.downloadTool(url);
     console.log(`Extracting ${path_7z}...`);
     const path_cmd = await tc.extract7z(path_7z);
     console.log(`Extracted to ${path_cmd}...`);
