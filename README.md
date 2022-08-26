@@ -1,6 +1,6 @@
 # setup-mesa-dist-win
 
-An action to install Mesa3D on windows from https://github.com/pal1000/mesa-dist-win/
+A GitHub Action to install Mesa3D from [pal1000/mesa-dist-win](https://github.com/pal1000/mesa-dist-win) on windows runners.
 
 ## Example usage
 
@@ -8,21 +8,23 @@ An action to install Mesa3D on windows from https://github.com/pal1000/mesa-dist
 uses: lkeegan/setup-mesa-dist-win@v1
 ```
 
-Optionally specify a release version and build type:
+Optionally specify the release version, build type or deployment choice:
 
 ```
 uses: lkeegan/setup-mesa-dist-win@v1
 with:
   version: '22.1.7'
   build-type: 'release-msvc'
+  deployment-choice: '1'
 ```
 
 ## Development
 
 To update this action:
 
-- modify files
-- run `npm ci`
-- run `npm run package`
-- commit the changes including the generated `dist` folder
+- clone this repo
+- modify the files
+- run `npm ci` to install the dependencies
+- run `npm run package` to generate the bundled package in `dist`
+- commit the changes including the `dist` folder
 - push to the `v1` branch

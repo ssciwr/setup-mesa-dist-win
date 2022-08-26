@@ -2,13 +2,17 @@ name: 'setup-mesa-dist-win'
 description: 'Installs Mesa3D from https://github.com/pal1000/mesa-dist-win/'
 inputs:
   version:
-    description: 'The mesa-dist-win release to use'
+    description: 'The mesa-dist-win release version to use'
     required: false
     default: '22.1.7'
-  build:
+  build-type:
     description: 'The mesa-dist-win build type to use'
     required: false
     default: 'release-msvc'
+  deployment-choice:
+    description: 'The mesa-dist-win deployment choice to use'
+    required: false
+    default: '1'
 runs:
   using: 'node16'
   main: 'dist/index.js'
