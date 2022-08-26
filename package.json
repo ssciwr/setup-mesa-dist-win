@@ -2,7 +2,7 @@
   "name": "setup-mesa-dist-win",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "package": "ncc build index.js -o dist --source-map --license licenses.txt"
   },

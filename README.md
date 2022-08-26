@@ -21,7 +21,8 @@ with:
 
 To update this action:
 
-- modify index.js
+- modify files
+- run `npm ci`
 - run `npm run package`
 - commit the changes including the generated `dist` folder
 - push to the `v1` branch

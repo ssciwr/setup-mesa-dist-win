@@ -11,4 +11,4 @@ inputs:
     default: 'release-msvc'
 runs:
   using: 'node16'
-  main: 'index.js'
+  main: 'dist/index.js'
