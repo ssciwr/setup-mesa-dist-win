@@ -8,43 +8,44 @@ async function run() {
     core.info(`This action is only available for windows.`);
   } else {
     try {
-      const originalCwd = process.cwd()
-
       const version = core.getInput('version');
       const build_type = core.getInput('build-type');
-      const deployment_choice = core.getInput('deployment-choice')
+      const deployment_choice = core.getInput('deployment-choice');
 
-      const repo = "https://github.com/pal1000/mesa-dist-win"
-      const filename = `mesa3d-${version}-${build_type}`
-      const url = `${repo}/releases/download/${version}/${filename}.7z`
-      const tmp_dir = `${process.env.RUNNER_TEMP}\\setup-mesa-dist-win`
+      const repo = "https://github.com/pal1000/mesa-dist-win";
+      const filename = `mesa3d-${version}-${build_type}`;
+      const url = `${repo}/releases/download/${version}/${filename}.7z`;
+      const tmp_dir = `${process.env.RUNNER_TEMP}\\setup-mesa-dist-win`;
+      const cwd_initial = process.cwd();
 
-      core.startGroup(`Downloading ${filename}`)
+      core.startGroup(`Downloading ${filename}`);
       core.info(`Creating temporary folder ${tmp_dir}`);
       await io.mkdirP(tmp_dir);
-      process.chdir(tmp_dir)
+      core.info(`Changing working directory to ${tmp_dir}`);
+      process.chdir(tmp_dir);
       core.info(`Downloading ${url}`);
       const path_7z = await tc.downloadTool(url, `mesa.7z`);
       core.info(`Downloaded to ${path_7z}`);
       await exec.exec('powershell.exe', ['ls']);
-      core.endGroup()
+      core.endGroup();
 
-      core.startGroup('Extracting')
+      core.startGroup('Extracting');
       await exec.exec('7z.exe', ['x', path_7z]);
       await exec.exec('powershell.exe', ['ls']);
-      core.endGroup()
+      core.endGroup();
 
-      core.startGroup('Installing')
+      core.startGroup('Installing');
       await exec.exec('powershell.exe', [`.\\systemwidedeploy.cmd`, deployment_choice]);
-      core.endGroup()
-    } catch (error) {
-      core.setFailed(error.message);
-    } finally {
-      core.startGroup('Cleaning up')
-      process.chdir(originalCwd)
+      core.endGroup();
+
+      core.startGroup('Cleaning up');
+      core.info(`Resetting working directory to ${cwd_initial}`);
+      process.chdir(cwd_initial);
       core.info(`Removing temporary folder ${tmp_dir}`);
       await io.rmRF(tmp_dir);
-      core.endGroup()
+      core.endGroup();
+    } catch (error) {
+      core.setFailed(error.message);
     }
   }
 }
