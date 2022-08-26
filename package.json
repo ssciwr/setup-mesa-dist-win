@@ -1,22 +1,22 @@
 {
   "name": "setup-mesa-dist-win",
   "version": "1.0.0",
-  "description": "",
+  "description": "Installs Mesa3D from https://github.com/pal1000/mesa-dist-win/",
   "main": "index.js",
   "scripts": {
     "package": "ncc build index.js -o dist --source-map --license licenses.txt"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lkeegan/setup-mesa-dist-win.git"
+    "url": "git+https://github.com/ssciwr/setup-mesa-dist-win.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Mesa3D", "opengl", "mesa-dist-win"],
+  "author": "Liam Keegan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lkeegan/setup-mesa-dist-win/issues"
+    "url": "https://github.com/ssciwr/setup-mesa-dist-win/issues"
   },
-  "homepage": "https://github.com/lkeegan/setup-mesa-dist-win#readme",
+  "homepage": "https://github.com/ssciwr/setup-mesa-dist-win#readme",
   "dependencies": {
     "@actions/core": "^1.9.1",
     "@actions/exec": "^1.1.1",

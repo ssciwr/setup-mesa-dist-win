@@ -1,17 +1,19 @@
 # setup-mesa-dist-win
 
-A GitHub Action to install Mesa3D from [pal1000/mesa-dist-win](https://github.com/pal1000/mesa-dist-win) on windows runners.
+A GitHub Action to install Mesa3D from
+[pal1000/mesa-dist-win](https://github.com/pal1000/mesa-dist-win)
+on windows runners.
 
 ## Example usage
 
 ```yaml
-  - uses: lkeegan/setup-mesa-dist-win@v1
+  - uses: ssciwr/setup-mesa-dist-win@v1
 ```
 
 Optionally specify the release version, build type or deployment choice:
 
 ```yaml
-  - uses: lkeegan/setup-mesa-dist-win@v1
+  - uses: ssciwr/setup-mesa-dist-win@v1
     with:
       version: '22.1.7'
       build-type: 'release-msvc'
