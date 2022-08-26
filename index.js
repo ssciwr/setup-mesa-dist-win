@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const tc = require('@actions/tool-cache');
 const exec = require('@actions/exec');
+const io = require('@actions/io');
 
 async function run() {
   try {
@@ -14,16 +15,27 @@ async function run() {
       const url = `${repo}/releases/download/${version}/${filename}.7z`
 
       core.startGroup(`Downloading ${filename}`)
-      core.info(`${url} -> mesa.7z`);
-      const path_7z = await tc.downloadTool(url, 'mesa.7z');
+      const tmp_dir = `${process.env.RUNNER_TEMP}\\setup-mesa-dist-win`
+      core.info(`Creating temporary folder ${tmp_dir}`);
+      await io.mkdirP(tmp_dir);
+      core.info(`Downloading ${url}`);
+      const path_7z = await tc.downloadTool(url, `${tmp_dir}\\mesa.7z`);
+      core.info(`Downloaded to ${path_7z}`);
       core.endGroup()
 
       core.startGroup('Extracting')
       await exec.exec('7z.exe', ['x', path_7z]);
+      await exec.exec('powershell.exe', ['ls']);
+      await exec.exec('powershell.exe', ['ls', tmp_dir]);
       core.endGroup()
 
       core.startGroup('Installing')
-      await exec.exec('powershell.exe', ['.\\systemwidedeploy.cmd', deployment_choice]);
+      await exec.exec('powershell.exe', [`${tmp_dir}\\systemwidedeploy.cmd`, deployment_choice]);
+      core.endGroup()
+
+      core.startGroup('Cleaning up')
+      core.info(`Removing temporary folder ${tmp_dir}`);
+      await io.rmRF(tmp_dir);
       core.endGroup()
     } else {
       core.info(`This action is only available for windows.`);
