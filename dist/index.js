@@ -6691,8 +6691,12 @@ const exec = __nccwpck_require__(1514);
 const io = __nccwpck_require__(7436);
 
 async function run() {
-  try {
-    if (process.platform === 'win32'){
+  if (process.platform === 'win32'){
+    core.info(`This action is only available for windows.`);
+  } else {
+    try {
+      const originalCwd = process.cwd()
+
       const version = core.getInput('version');
       const build_type = core.getInput('build-type');
       const deployment_choice = core.getInput('deployment-choice')
@@ -6700,13 +6704,12 @@ async function run() {
       const repo = "https://github.com/pal1000/mesa-dist-win"
       const filename = `mesa3d-${version}-${build_type}`
       const url = `${repo}/releases/download/${version}/${filename}.7z`
-      const originalCwd = process.cwd()
+      const tmp_dir = `${process.env.RUNNER_TEMP}\\setup-mesa-dist-win`
 
       core.startGroup(`Downloading ${filename}`)
-      const tmp_dir = `${process.env.RUNNER_TEMP}\\setup-mesa-dist-win`
       core.info(`Creating temporary folder ${tmp_dir}`);
       await io.mkdirP(tmp_dir);
-      process.chdir(dest)
+      process.chdir(tmp_dir)
       core.info(`Downloading ${url}`);
       const path_7z = await tc.downloadTool(url, `mesa.7z`);
       core.info(`Downloaded to ${path_7z}`);
@@ -6721,17 +6724,15 @@ async function run() {
       core.startGroup('Installing')
       await exec.exec('powershell.exe', [`.\\systemwidedeploy.cmd`, deployment_choice]);
       core.endGroup()
-    } else {
-      core.info(`This action is only available for windows.`);
+    } catch (error) {
+      core.setFailed(error.message);
+    } finally {
+      core.startGroup('Cleaning up')
+      process.chdir(originalCwd)
+      core.info(`Removing temporary folder ${tmp_dir}`);
+      await io.rmRF(tmp_dir);
+      core.endGroup()
     }
-  } catch (error) {
-    core.setFailed(error.message);
-  } finally {
-    core.startGroup('Cleaning up')
-    process.chdir(originalCwd)
-    core.info(`Removing temporary folder ${tmp_dir}`);
-    await io.rmRF(tmp_dir);
-    core.endGroup()
   }
 }
 
