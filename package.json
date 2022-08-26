@@ -1,0 +1,29 @@
+{
+  "name": "setup-mesa-dist-win",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "package": "ncc build index.js -o dist --source-map --license licenses.txt",
+    "all": "npm run package"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lkeegan/setup-mesa-dist-win.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lkeegan/setup-mesa-dist-win/issues"
+  },
+  "homepage": "https://github.com/lkeegan/setup-mesa-dist-win#readme",
+  "dependencies": {
+    "@actions/core": "^1.9.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/tool-cache": "^2.0.1"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.34.0"
+  }
+}
