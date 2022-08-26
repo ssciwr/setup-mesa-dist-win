@@ -6691,9 +6691,10 @@ const exec = __nccwpck_require__(1514);
 
 async function run() {
   try {
+    const repo = "https://github.com/pal1000/mesa-dist-win"
     const version = core.getInput('version');
     const build = core.getInput('build');
-    const url = `https://github.com/pal1000/mesa-dist-win/releases/download/${version}/mesa3d-${version}-${build}.7z`
+    const url = `${repo}/releases/download/${version}/mesa3d-${version}-${build}.7z`
     console.log(`Downloading ${url}...`);
     const path_7z = await tc.downloadTool('https://nodejs.org/dist/v12.7.0/node-v12.7.0-win-x64.7z');
     console.log(`Extracting ${path_7z}...`);

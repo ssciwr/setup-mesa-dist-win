@@ -4,8 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "package": "ncc build index.js -o dist --source-map --license licenses.txt",
-    "all": "npm run package"
+    "package": "ncc build index.js -o dist --source-map --license licenses.txt"
   },
   "repository": {
     "type": "git",
