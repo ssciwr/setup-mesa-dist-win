@@ -11,16 +11,17 @@ async function run() {
     const url = `${repo}/releases/download/${version}/${filename}`
     console.log(`Downloading ${url} ...`);
     const folder_7z = await tc.downloadTool(url);
-    await exec.exec('cmd.exe', ['dir', folder_7z]);
+    await exec.exec('powershell.exe', ['ls']);
+    await exec.exec('powershell.exe', ['ls', folder_7z]);
     const file_7z = `${folder_7z}\\${filename}`
     console.log(`Downloaded to ${file_7z}`);
     console.log(`Extracting $file_7z} ...`);
-    const path_cmd = await tc.extract7z(path_7z);
+    const path_cmd = await tc.extract7z(file_7z);
     console.log(`Extracted to ${path_cmd}...`);
-    await exec.exec('cmd.exe', ['pwd']);
-    await exec.exec('cmd.exe', ['dir']);
+    await exec.exec('powershell.exe', ['ls']);
+    await exec.exec('powershell.exe', ['ls', path_cmd]);
     console.log(`Running systemwidedeploy.cmd 1...`);
-    await exec.exec('cmd.exe', ['systemwidedeploy.cmd', '1']);
+    await exec.exec('powershell.exe', ['systemwidedeploy.cmd', '1']);
   } catch (error) {
     core.setFailed(error.message);
   }
