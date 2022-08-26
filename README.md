@@ -20,11 +20,15 @@ with:
 
 ## Development
 
-To update this action:
+To make a new release:
 
-- clone this repo
-- modify the files
+- update the version number in [package.json](package.json#L3)
 - run `npm ci` to install the dependencies
 - run `npm run package` to generate the bundled package in `dist`
-- commit the changes including the `dist` folder
-- push to the `v1` branch
+- commit the changes including the `dist` folder and push
+- tag the commit with the full version number, e.g.
+  - `git tag v1.0.7`
+  - `git push origin v1.0.7`
+- move the `v1` tag to this commit
+  - `git tag -f v1`
+  - `git push origin v1 -f`
