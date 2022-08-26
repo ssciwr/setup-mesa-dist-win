@@ -16,7 +16,7 @@ async function run() {
     await exec.exec('cmd.exe', ['pwd']);
     await exec.exec('cmd.exe', ['dir']);
     console.log(`Running systemwidedeploy.cmd 1...`);
-    await exec.exec('cmd.exe', ['systemwidedeploy.cmd' '1']);
+    await exec.exec('cmd.exe', ['systemwidedeploy.cmd', '1']);
   } catch (error) {
     core.setFailed(error.message);
   }

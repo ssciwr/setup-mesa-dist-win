@@ -6699,11 +6699,11 @@ async function run() {
     const path_7z = await tc.downloadTool('https://nodejs.org/dist/v12.7.0/node-v12.7.0-win-x64.7z');
     console.log(`Extracting ${path_7z}...`);
     const path_cmd = await tc.extract7z(path_7z);
-    console.log(`${path_cmd}...`);
-    await exec.exec('pwd');
-    await exec.exec('dir');
+    console.log(`Extracted to ${path_cmd}...`);
+    await exec.exec('cmd.exe', ['pwd']);
+    await exec.exec('cmd.exe', ['dir']);
     console.log(`Running systemwidedeploy.cmd 1...`);
-    await exec.exec('systemwidedeploy.cmd 1');
+    await exec.exec('cmd.exe', ['systemwidedeploy.cmd', '1']);
   } catch (error) {
     core.setFailed(error.message);
   }
