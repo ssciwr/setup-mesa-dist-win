@@ -10,18 +10,17 @@ async function run() {
     const filename = `mesa3d-${version}-${build}.7z`
     const url = `${repo}/releases/download/${version}/${filename}`
     console.log(`Downloading ${url} ...`);
-    const folder_7z = await tc.downloadTool(url);
+    const path_7z = await tc.downloadTool(url, 'C:/mesa.7z');
     await exec.exec('powershell.exe', ['ls']);
-    await exec.exec('powershell.exe', ['ls', folder_7z]);
-    const file_7z = `${folder_7z}\\${filename}`
-    console.log(`Downloaded to ${file_7z}`);
-    console.log(`Extracting $file_7z} ...`);
-    const path_cmd = await tc.extract7z(file_7z);
-    console.log(`Extracted to ${path_cmd}...`);
+    await exec.exec('powershell.exe', ['ls', path_7z]);
+    console.log(`Downloaded to ${path_7z}`);
+    console.log(`Extracting ${path_7z} ...`);
+    const path_cmd = await tc.extract7z(path_7z);
+    console.log(`Extracted to ${path_cmd}`);
     await exec.exec('powershell.exe', ['ls']);
     await exec.exec('powershell.exe', ['ls', path_cmd]);
     console.log(`Running systemwidedeploy.cmd 1...`);
-    await exec.exec('powershell.exe', ['systemwidedeploy.cmd', '1']);
+    await exec.exec('powershell.exe', ['.\systemwidedeploy.cmd', '1']);
   } catch (error) {
     core.setFailed(error.message);
   }
