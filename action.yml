@@ -4,7 +4,7 @@ inputs:
   version:
     description: 'The mesa-dist-win release version to use'
     required: false
-    default: '22.1.7'
+    default: '23.3.3'
   build-type:
     description: 'The mesa-dist-win build type to use'
     required: false
@@ -14,5 +14,5 @@ inputs:
     required: false
     default: '1'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
