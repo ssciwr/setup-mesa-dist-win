@@ -1,16 +1,28 @@
 {
   "name": "setup-mesa-dist-win",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Installs Mesa3D from https://github.com/pal1000/mesa-dist-win/",
-  "main": "index.js",
+  "type": "module",
+  "packageManager": "pnpm@10.32.1",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
-    "package": "ncc build index.js -o dist --source-map --license licenses.txt"
+    "package": "rimraf ./dist && rollup --config rollup.config.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ssciwr/setup-mesa-dist-win.git"
   },
-  "keywords": ["Mesa3D", "opengl", "mesa-dist-win"],
+  "keywords": [
+    "Mesa3D",
+    "opengl",
+    "mesa-dist-win"
+  ],
   "author": "Liam Keegan",
   "license": "MIT",
   "bugs": {
@@ -18,11 +30,15 @@
   },
   "homepage": "https://github.com/ssciwr/setup-mesa-dist-win#readme",
   "dependencies": {
-    "@actions/core": "^1.10.1",
-    "@actions/exec": "^1.1.1",
-    "@actions/tool-cache": "^2.0.1"
+    "@actions/core": "^3.0.0",
+    "@actions/exec": "^3.0.0",
+    "@actions/io": "^3.0.2",
+    "@actions/tool-cache": "^4.0.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.38.1"
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.57.1"
   }
 }
